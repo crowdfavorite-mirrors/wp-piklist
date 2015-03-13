@@ -1,14 +1,14 @@
 === PIKLIST | Rapid development framework ===
 Contributors: piklist, p51labs, sbruner
 Tags: piklist, framework, cms, custom post types, post type, custom taxonomies, taxonomy, custom comment type, comments, settings, widgets
-Tested up to: 3.8
+Tested up to: 3.9
 Requires at least: 3.6
 Stable tag: 0.9.4
 Donate link: http://piklist.com/get-involved/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A rapid development framework for WordPress.
+The most powerful framework available for WordPress.
 
 == Description ==
 
@@ -95,8 +95,40 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 == Changelog ==
 
 = 0.9.4 =
-* IMPROVED: Widget system.
+* The most stable version of Piklist yet.
+* Tons of performance updates.
+* NEW: Field validation.
+* NEW: Field sanitization.
+* NEW: label_class attribute
+* ENHANCED: Field conditions.
+* ENHANCED: Faster, reengineered Widget system.
+* ENHANCED: Piklist Widgets work better in Theme Customizer.
+* ENHANCED: Filter everything by user role.
+* ENHANCED: Tooltips match WordPress default themes.
+* ENHANCED: index.php files are ignored in parts folders.
 * FIXED: Quick edit buttons work properly.
+* FIXED: Textarea values do not carry over in Add-Mores. Props Daniel Rampanelli
+* FIXED: Preview button only shows for Public Post Types. Props Daniel Rampanelli
+* FIXED: Adding fields to an already save Add-More works properly. Props Daniel Rampanelli
+* FIXED: Autosaves triggered by "Preview Changes". Props Daniel Rampanelli
+* FIXED: Field attributes properly accept a zero value. Props @jasontheadams
+* FIXED: piklist_empty_post_title filter now works as expected.
+* Lots and lots and lots and lots of bug fixes.
+
+= 0.9.3.5 =
+* FIXED: Language files load properly.
+* FIXED: Menu icon size no longer conflicts with other plugins.
+
+= 0.9.3.4 =
+* FIXED: Upgrade script works on older version of mysql.
+
+= 0.9.3.3 =
+* FIXED: Update to class-piklist-user
+
+= 0.9.3.2 =
+* FIXED: User registrations emails no longer conflict with other plugins (i.e. BuddyPress)
+* FIXED: check_update function respects new plugins.
+* FIXED: notice from post_row_actions function.
 
 = 0.9.3.1 =
 * FIXED: Addmore field bug fix.
