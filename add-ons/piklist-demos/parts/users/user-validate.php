@@ -36,7 +36,7 @@ Order: 10
         ,'required' => true
         ,'columns' => 12
         ,'choices' => array(
-          'true' => 'Hierarchical <span class="piklist-required">*</span>'
+          'true' => 'Hierarchical'
         )
       )
     )

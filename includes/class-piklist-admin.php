@@ -290,6 +290,7 @@ class PikList_Admin
 
       piklist::render('shared/admin-page', array(
         'section' => $page['menu_slug']
+        ,'notice' => isset($page['sub_menu']) ? !in_array($page['sub_menu'], array('options-general.php')) : false
         ,'icon' => isset($page['icon']) ? $page['icon'] : false
         ,'page_icon' => isset($page['page_icon']) ? $page['page_icon'] : (isset($page['icon']) ? $page['icon'] : null)         
         ,'single_line' => isset($page['single_line']) ? $page['single_line'] : false
@@ -341,6 +342,7 @@ class PikList_Admin
   public static function deactivation_link()
   {
     add_filter('plugin_action_links_piklist/piklist.php', array('piklist_admin', 'replace_deactivation_link'));
+    add_filter('network_admin_plugin_action_links_piklist/piklist.php', array('piklist_admin', 'replace_deactivation_link'));    
     
     $classes = 'piklist-dependent';
 
@@ -352,7 +354,7 @@ class PikList_Admin
   {
     unset($actions['deactivate']);
     
-    array_unshift($actions, '<p>' . sprintf(__('Dependent plugins or theme are active.', 'piklist'),'<br>') . '</p>Deactivate'); 
+    array_unshift($actions, '<p>' . sprintf(__('Dependent plugins or theme are active.', 'piklist'),'<br>') . (is_network_admin() ? sprintf(__('%1$s Network Deactivate', 'piklist'), '</p>') : sprintf(__('%1$sDeactivate', 'piklist'), '</p>'))); 
 
     return $actions;
   }

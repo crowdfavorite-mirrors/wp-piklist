@@ -87,18 +87,18 @@ class PikList_Validate
   {
     if (!empty(self::$submission['errors']))
     {
-      $messages = array();
+      $notices = array();
       foreach (self::$submission['errors'] as $type => $fields)
       {
         foreach ($fields as $field => $errors)
         {
-          array_push($messages, current($errors));
+          array_push($notices, current($errors));
         }
       }
       
       piklist::render('shared/admin-notice', array(
         'type' => 'error'
-        ,'messages' => $messages
+        ,'notices' => $notices
       ));
     }
   }

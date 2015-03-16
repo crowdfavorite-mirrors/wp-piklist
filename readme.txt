@@ -1,12 +1,13 @@
 === PIKLIST | Rapid development framework ===
 Contributors: piklist, p51labs, sbruner
-Tags: piklist, framework, cms, custom post types, post type, custom taxonomies, taxonomy, custom comment type, comments, settings, widgets
-Tested up to: 3.9
-Requires at least: 3.6
-Stable tag: 0.9.4
+Tested up to: 4.1
+Requires at least: 3.7
+Stable tag: 0.9.4.25
 Donate link: http://piklist.com/get-involved/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+Tags: piklist,framework,cms,admin,admin pages,settings,settings pages,content types,custom post types,post type,post type fields,custom taxonomies,taxonomy,taxonomy fields,term fields,custom comment type,comments,custom fields,widgets,help,help tabs,contextual help,media,media fields,admin notices,alerts,admin pointers,pointers,users,user profiles,user fields,validate,validation,field validation,field sanitization,sanitization,sanitize,tabs,tabbed sections,tabbed settings
 
 The most powerful framework available for WordPress.
 
@@ -83,16 +84,93 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   Hide/Show based on the users capability.
 *   Hide form fields, and just show field values
 
-= Translators =
-* French (fr) - Daniel Ménard
-* Slovak (sk) - Branco
-
 == Installation ==
 
 *   Install and activate Piklist like any other plugin.
-*   DEVELOPERS: <a href="http://piklist.com">Learn how to develop</a> Piklist Powered Themes and Plugins.
+*   DEVELOPERS: Learn how to develop Piklist Powered <a href="https://piklist.com/user-guide/tutorials/giving-your-theme-some-piklist-power/">Themes</a> and <a href="https://piklist.com/user-guide/tutorials/writing-a-plugin-for-piklist/">Plugins</a>.
 
 == Changelog ==
+
+= 0.9.4.24 =
+* ENHANCED: CSS updates
+
+= 0.9.4.23 =
+* FIXED: Non-image files can be removed from file upload field.
+* ENHANCED: Updates to group fields.
+
+= 0.9.4.22 =
+* FIXED: Workflows now work as expected.
+
+= 0.9.4.21 =
+* ENHANCED: Define your own CSS Classes for Widgets.
+* ENHANCED: Allow 'page' parameter to work on individual Workflow tabs.
+* FIXED: Dashboard widget now shows correct count for Media.
+* FIXED: Datepicker works as expected.
+
+= 0.9.4.20 =
+* ENHANCED: Admin notices can now dismiss.
+* FIXED: Notice on conditional scripts.
+
+= 0.9.4.19 =
+* ENHANCEMENT: File upload preview images look better.
+
+= 0.9.4.18 =
+* NEW: HTML 5 field support.
+
+= 0.9.4.17 =
+* FIXED: CSS Tweak for upload fields and WordPress 4.0.
+
+= 0.9.4.16 =
+* FIXED: Admin notices work as expected.
+
+= 0.9.4.15 =
+* NEW: Admin notices
+* FIXED: Notice on Piklist about page.
+
+= 0.9.4.14 =
+* ENHANCED: WordPress 4.0 support.
+
+= 0.9.4.12 =
+* FIXED: Duplicate "Settings Saved" messages are gone.
+
+= 0.9.4.11 =
+* FIXED: Broken link on About page.
+
+= 0.9.4.10 =
+* ENHANCED: CSS tweak for ul.piklist-tab-bar
+
+= 0.9.4.9 =
+* NEW: Pointers!
+
+= 0.9.4.8 =
+* FIXED: Typo in Demos
+
+= 0.9.4.7 =
+* ENHANCED: Updated Widgets
+
+= 0.9.4.6 =
+* ENHANCED: Editor enhancement for group fields.
+
+= 0.9.4.5 =
+* FIXED: Added Taxonomy support for non-multiple fields.
+
+= 0.9.4.4 =
+* FIXED: Update to save_post action.
+
+= 0.9.4.3 =
+* FIXED: Post Relationships work as expected.
+
+= 0.9.4.2 =
+* FIXED: Radio buttons save properly in Settings.
+
+= 0.9.4.1 =
+* FIXED: Removed object_id from fields.
+* FIXED: Language files load properly.
+* FIXED: Locked notice works correctly on Multisite.
+* ENHANCED: Field conditions support add-mores.
+* ENHANCED: Field conditions support serialize groups.
+* ENHANCED: Field Columns switch to right margins.
+* ENHANCED: Right Now widget css update.
 
 = 0.9.4 =
 * The most stable version of Piklist yet.
