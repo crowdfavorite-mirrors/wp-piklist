@@ -1,21 +1,26 @@
 === PIKLIST | Rapid development framework ===
 Contributors: piklist, p51labs, sbruner
-Tested up to: 4.1
+Tested up to: 4.2
 Requires at least: 3.7
-Stable tag: 0.9.4.25
+Stable tag: 0.9.4.26
 Donate link: http://piklist.com/get-involved/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Tags: piklist,framework,cms,admin,admin pages,settings,settings pages,content types,custom post types,post type,post type fields,custom taxonomies,taxonomy,taxonomy fields,term fields,custom comment type,comments,custom fields,widgets,help,help tabs,contextual help,media,media fields,admin notices,alerts,admin pointers,pointers,users,user profiles,user fields,validate,validation,field validation,field sanitization,sanitization,sanitize,tabs,tabbed sections,tabbed settings
+Tags: admin,admin notices,admin pages,admin pointers,advanced,alerts,cms,comments,content types,contextual help,custom,custom comment type,custom,custom field,custom fields,custom post types,custom taxonomies,edit,field,field sanitization,editor,field validation,file,framework,help,help tabs,html5,image,images,integration,magic fields,media,media fields,more fields,piklist,pointers,post,posts,post type,post type fields,repeater,sanitization,sanitize,settings,settings pages,simple fields,tabbed sections,tabbed settings,tabs,taxonomy,taxonomy fields,term fields,text, textarea, type,upload,upload field,user fields,user profiles,users,validate,validation,widget,widgets
 
-The most powerful framework available for WordPress.
+
+Piklist is the most powerful framework available for WordPress.
+Easy for beginners... built for developers. Piklist helps you build things - fast.
 
 == Description ==
 
 **CURRENTLY IN BETA**
 
-Piklist is the developers best friend. A rapid development framework for WordPress that will let you concentrate on the main focus of your plugin or theme, and let Piklist handle everything else.
+= Piklist is the most powerful framework available for WordPress. =
+Easy for beginners... built for developers. Piklist helps you build things - fast.
+
+Pikilst is a rapid development framework for WordPress that will let you concentrate on the main focus of your plugin or theme, and let Piklist handle everything else.
 
 [Watch the Piklist presentation from WordCamp NYC >](http://wordpress.tv/2012/09/04/steve-bruner-and-kevin-miller-building-powerful-websites-and-web-applications-with-piklist/):
 
@@ -29,6 +34,19 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 
 = LEARN MORE =
 *   <a href="http://piklist.com/user-guide/">Piklist User Guide</a>
+
+= Customize everything in WordPress =
+*   Post Types
+*   Taxonomies
+*   User Profiles
+*   Media
+*   Settings
+*   Admin Pages
+*   Widgets
+*   Dashboard
+*   Help Tabs
+*   Admin Notices
+*   Pointers
 
 
 = Better Custom Post Types =
@@ -45,26 +63,29 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   Lock the box, so users cannot move or hide them.
 *   Add meta box to a specific Page/Post ID.
 
-= Simple, Groupable Widgets =
-*   Group widgets into one widget to save space, and make finding them easier 
+= Simple Widgets =
 *   Create one file for your Widget settings, and one for your output... all done!
-*   Use any Piklist field type in your widget settings page.
 
 = Powerful Fields =
-*   Backend, Frontend, Widgets... it all works the same.
+*   ANY field or groups of fields can be a repeater.
+*   Validate and Sanitize any field.
 
-= Lots of field types (and more coming soon!): =
+= Lots of field types (and more coming soon!) =
 *   text
 *   textarea
 *   checkbox
 *   radio
 *   select
 *   post editor
+*   file upload
+*   image upload
 *   hidden
 *   html
 *   date chooser 
 *   color picker
 *   add more
+*   HTML5
+
 
 = Choose a content type for your field (You can even mix-n-match on one form) =
 *   post
@@ -84,12 +105,55 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 *   Hide/Show based on the users capability.
 *   Hide form fields, and just show field values
 
+
+= Please Review Piklist =
+<a href="http://wordpress.org/support/view/plugin-reviews/piklist">Your reviews really make a difference! Thanks.</a>
+
+
+> #### Getting Started with Piklist is Easy.
+> <a href="https://piklist.com/user-guide/tutorials/getting-started-with-piklist/">Read our getting started tutorial.</a>
+
 == Installation ==
 
 *   Install and activate Piklist like any other plugin.
 *   DEVELOPERS: Learn how to develop Piklist Powered <a href="https://piklist.com/user-guide/tutorials/giving-your-theme-some-piklist-power/">Themes</a> and <a href="https://piklist.com/user-guide/tutorials/writing-a-plugin-for-piklist/">Plugins</a>.
 
+
+== Frequently Asked Questions ==
+
+= What does this plugin do? =
+Piklist provides a stable framework for building amazing things with WordPress.
+
+= I'm a beginner, is Piklist for me? =
+Piklist makes it very easy for beginners to <a href="https://piklist.com/user-guide/tutorials/getting-started-with-piklist/">get started</a>. In most cases you can just copy and paste code you find in the Piklist built-in Demos, one of our tutorials or in the support forums.
+
+= I'm a developer, is Piklist for me? =
+Piklist was originally built for developers. It was inspired by Ruby on Rails, jQuery and Django. Piklist is a fast and concise plugin that encourages WordPress rapid development. It simplifies many of the more difficult tasks in WordPress and adds functionality not presently common in WordPress core. 
+
+We’ve worked hard to make Piklist easy to use for beginners, and powerful enough for Developers… and our users all agree!
+
+= Where's the User Interface? =
+Piklist is a code-based framework, which means it has no user interface. We believe this is one of the biggest benefits to using Piklist. At first glance, UI based field builders look easier, but in our experience they are not. Code based systems allow you greater flexibility in your field configurations and development, and will save you time in the long run. With Piklist you can usually use the same code you have written in one section and use it in another, allowing you to copy and paste, and save tons of time.
+
+Piklist comes with built-in Demos. If you find a field you like, just copy the code and paste it into your project... seriously, it's that easy.
+
+Code-based frameworks also allows you to version control your code, which is very difficult to do with a UI based framework. All you have to do is press delete by accident in a UI-based system, and you've just lost your work. With version control that never happens.
+
+= What's the best way to get started with Piklist? =
+1. Install and activate the plugin.
+2. Go through our <a href="https://piklist.com/user-guide/tutorials/getting-started-with-piklist/">Getting Started with Piklist</a> tutorial.
+3. <a href="https://piklist.com/user-guide/tutorials/piklists-built-demos/">Activate the built-in Demos</a> to get an idea of what you can build. If you like something in the demos, you can just copy and paste it into your own project.
+4. Ask questions on our <a href="https://piklist.com/support/">Support Forum</a>. (We love hearing from our users)
+
+
+
 == Changelog ==
+
+= 0.9.4.26 =
+* FIX: Security update for admin notices. @props joostdevalk
+
+= 0.9.4.25 =
+* FIX: Better Windows support
 
 = 0.9.4.24 =
 * ENHANCED: CSS updates
@@ -429,14 +493,15 @@ Piklist is the developers best friend. A rapid development framework for WordPre
 == Upgrade Notice ==
 
 = 0.6.7 =
-* Major upgrade. Looks of awesome new features.
+* Major upgrade. Lots of awesome new features.
 
 = 0.6.4 =
-* Fixes major issue with Publish box. Please upgrade.
+* Fixed major issue with Publish box. Please upgrade.
 
 == Screenshots ==
 
-1. Post relationships: You'll wish all relationships were this easy.
-2. Add-mores: The infinite repeater field.
-3. WorkFlows: The tab system you never knew was possible.
-4. Multiple user roles: Better security, more flexibility.
+1. Less code required: Creating fields in Piklist is super simple, and in most cases the same code can be used anywhere: Post Types, Settings, Taxonomies, User Profiles and Widgets.
+2. Post relationships: You'll wish all relationships were this easy.
+3. Add-mores: The infinite repeater field.
+4. WorkFlows: The tab system you never knew was possible.
+5. Multiple user roles: Better security, more flexibility.
