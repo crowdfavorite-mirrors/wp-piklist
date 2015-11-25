@@ -2,7 +2,7 @@
 Contributors: piklist, p51labs, sbruner
 Tested up to: 4.3
 Requires at least: 3.7
-Stable tag: 0.9.4.28
+Stable tag: 0.9.4.29
 Donate link: http://piklist.com/get-involved/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -148,6 +148,11 @@ Code-based frameworks also allows you to version control your code, which is ver
 
 
 == Changelog ==
+= 0.9.4.29 =
+Release Date: September 22, 2015
+
+* Getting ready for WordPress 4.4: Do not drop the termmeta table on uninstall.
+
 = 0.9.4.28 =
 Release Date: August 18, 2015
 
