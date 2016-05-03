@@ -1,8 +1,8 @@
 === PIKLIST | Rapid development framework ===
 Contributors: piklist, p51labs, sbruner
-Tested up to: 4.3
+Tested up to: 4.5
 Requires at least: 3.7
-Stable tag: 0.9.4.29
+Stable tag: 0.9.4.30
 Donate link: http://piklist.com/get-involved/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -50,16 +50,16 @@ Piklist is a rapid development framework for WordPress that will let you concent
 
 
 = Better Custom Post Types =
-*   Powerful Custom Post Types 
-*   Relate Custom Post Types to each other. 
-*   Add your own post statuses. 
+*   Powerful Custom Post Types
+*   Relate Custom Post Types to each other.
+*   Add your own post statuses.
 
 = Codeless Meta Boxes =
 *   Group fields in a meta box, by placing them all in one file.
-*   Add a comment block at the top of your file to define the meta box attributes 
-*   Hide/Show based on the post status. 
-*   Hide/Show based on the users capability. 
-*   Sort meta boxes with granular control. 
+*   Add a comment block at the top of your file to define the meta box attributes
+*   Hide/Show based on the post status.
+*   Hide/Show based on the users capability.
+*   Sort meta boxes with granular control.
 *   Lock the box, so users cannot move or hide them.
 *   Add meta box to a specific Page/Post ID.
 
@@ -81,7 +81,7 @@ Piklist is a rapid development framework for WordPress that will let you concent
 *   image upload
 *   hidden
 *   html
-*   date chooser 
+*   date chooser
 *   color picker
 *   add more
 *   HTML5
@@ -100,7 +100,7 @@ Piklist is a rapid development framework for WordPress that will let you concent
 *   media_meta
 
 = Mix Field and Content types (i.e. Taxonomies as radio buttons) =
-*   Hide/Show based on another form field. 
+*   Hide/Show based on another form field.
 *   Hide/Show based on the post status.
 *   Hide/Show based on the users capability.
 *   Hide form fields, and just show field values
@@ -128,7 +128,7 @@ Piklist provides a stable framework for building amazing things with WordPress.
 Piklist makes it very easy for beginners to <a href="https://piklist.com/user-guide/tutorials/getting-started-with-piklist/">get started</a>. In most cases you can just copy and paste code you find in the Piklist built-in Demos, one of our tutorials or in the support forums.
 
 = I'm a developer, is Piklist for me? =
-Piklist was originally built for developers. It was inspired by Ruby on Rails, jQuery and Django. Piklist is a fast and concise plugin that encourages WordPress rapid development. It simplifies many of the more difficult tasks in WordPress and adds functionality not presently common in WordPress core. 
+Piklist was originally built for developers. It was inspired by Ruby on Rails, jQuery and Django. Piklist is a fast and concise plugin that encourages WordPress rapid development. It simplifies many of the more difficult tasks in WordPress and adds functionality not presently common in WordPress core.
 
 Weâ€™ve worked hard to make Piklist easy to use for beginners, and powerful enough for Developersâ€¦ and our users all agree!
 
@@ -148,6 +148,13 @@ Code-based frameworks also allows you to version control your code, which is ver
 
 
 == Changelog ==
+
+= 0.9.4.30 =
+Release Date: April 14, 2016
+
+* WordPress 4.5 ready
+
+
 = 0.9.4.29 =
 Release Date: September 22, 2015
 

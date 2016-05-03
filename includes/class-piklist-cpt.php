@@ -195,7 +195,7 @@ class PikList_CPT
           array_push(self::$meta_boxes_hidden[$post_type], $meta_box . (in_array($meta_box, self::$meta_boxes_builtin) ? 'div' : null));
         }
       }
-      
+
       add_action('admin_head', array('piklist_cpt', 'hide_meta_boxes'), 100);
 
       if (isset($configuration['title']) && !empty($configuration['title']))
@@ -295,7 +295,7 @@ class PikList_CPT
       {
         global $pagenow;
 
-        if (($pagenow == 'edit-tags.php') && ($_REQUEST['taxonomy'] == $taxonomy['name']))
+        if ((in_array($pagenow, array('edit-tags.php', 'term.php'))) && ($_REQUEST['taxonomy'] == $taxonomy['name']))
         {
           piklist_admin::$page_icon = array(
             'page_id' => isset($taxonomy['object_type']) && $taxonomy['object_type'] == 'user' ? '#icon-users.icon32' : '#icon-edit.icon32'
@@ -304,7 +304,7 @@ class PikList_CPT
         }
       }
     }
-    
+
     self::flush_rewrite_rules(md5(serialize($check)), 'piklist_taxonomy_rules_flushed');
   }
 
@@ -320,7 +320,7 @@ class PikList_CPT
   public static function hide_meta_boxes()
   {
     global $pagenow, $wp_meta_boxes, $typenow, $post;
-    
+
     if (in_array($pagenow, array('post.php', 'post-new.php')))
     {
       if (isset(self::$meta_boxes_hidden[$typenow]) && !in_array('submitdiv', self::$meta_boxes_hidden[$typenow]))
@@ -415,7 +415,7 @@ class PikList_CPT
     {
       $_wp_post_statuses[$status] = $wp_post_statuses[$status];
     }
-    
+
     foreach ($wp_post_statuses as $status => $data)
     {
       if (!isset($_wp_post_statuses[$status]))
@@ -423,7 +423,7 @@ class PikList_CPT
         $_wp_post_statuses = array_merge(array($status => $data), $_wp_post_statuses);
       }
     }
-    
+
     $wp_post_statuses = $_wp_post_statuses;
   }
 
@@ -530,7 +530,7 @@ class PikList_CPT
     {
       return $post_id;
     }
-    
+
     remove_action('save_post', array('piklist_cpt', 'save_post'), -1);
 
     piklist_form::save(array(
@@ -575,7 +575,7 @@ class PikList_CPT
     $data = apply_filters('piklist_add_part', $data, 'meta-boxes');
 
     $types = empty($data['type']) ? get_post_types() : explode(',', $data['type']);
-    
+
     foreach ($types as $type)
     {
       $type = trim($type);
@@ -583,7 +583,7 @@ class PikList_CPT
       $statuses = !empty($data['status']) ? explode(',', $data['status']) : false;
       $ids = !empty($data['id']) ? explode(',', $data['id']) : false;
       $name = !empty($data['name']) ? $data['name'] : 'piklist_meta_' . piklist::slug($part);
-      
+
       if (post_type_exists($type)
         && (!$data['capability'] || ($data['capability'] && current_user_can(strtolower($data['capability']))))
         && (!$data['role'] || ($data['role'] && piklist_user::current_user_role($data['role'])))
@@ -595,7 +595,7 @@ class PikList_CPT
       {
         $id = !empty($data['div']) ? $data['div'] : 'piklist_meta_' . piklist::slug($part);
         $textdomain = isset(piklist_add_on::$available_add_ons[$add_on]) && isset(piklist_add_on::$available_add_ons[$add_on]['TextDomain']) ? piklist_add_on::$available_add_ons[$add_on]['TextDomain'] : null;
-         
+
         add_meta_box(
           $id
           ,!empty($textdomain) ? __($name, $textdomain) : $name
@@ -660,7 +660,7 @@ class PikList_CPT
       ,'prefix' => 'piklist'
       ,'plugin' => 'piklist'
     ), false);
-    
+
     do_action('piklist_post_render_meta_box', $post, $meta_box);
   }
 
