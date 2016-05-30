@@ -26,8 +26,8 @@ Collapse: true
 <?php
 
   global $post, $current_user, $wp_post_statuses;
-  
-  get_currentuserinfo();
+
+	wp_get_current_user();
 
   $comments = get_comments(array(
     'post_id' => $post_id
@@ -45,11 +45,11 @@ Collapse: true
     <div class="piklist-label-container"></div>
 
       <div class="piklist-field">
-        
+
         <?php foreach ($comments as $comment): ?>
 
           <div style="padding: 5px 10px 5px 10px;">
-            
+
             <p>
 
               <small>
@@ -81,5 +81,5 @@ Collapse: true
     'location' => __FILE__
     ,'type' => 'Meta Box'
   ));
-  
+
 ?>

@@ -4,7 +4,8 @@
  */
 
 global $current_user;
-get_currentuserinfo();
+
+wp_get_current_user();
 
 ?>
 
@@ -73,8 +74,8 @@ get_currentuserinfo();
   .piklist-social-links a:hover {
     text-decoration: none;
     color: #F0F0F0;
-  } 
-  
+  }
+
   .piklist-social-links a.facebook_link {
     background: #3460A1;
   }
@@ -180,7 +181,7 @@ get_currentuserinfo();
     <span class="dashicons dashicons-twitter"></span>
   </a>
   <a class="google_plus_link" href="https://plus.google.com/u/0/b/108403125978548990804/108403125978548990804/posts">
-    <span class="dashicons dashicons-googleplus"></span>         
+    <span class="dashicons dashicons-googleplus"></span>
   </a>
 </div><!-- .piklist-social-links -->
 
@@ -329,7 +330,7 @@ get_currentuserinfo();
   </div>
 
   <div class="feature-section col three-col">
-    
+
     <div class="col-1">
       <h3><?php _e('List Tables','piklist');?></h3>
         <ul>
@@ -465,7 +466,7 @@ get_currentuserinfo();
     <span class="dashicons dashicons-twitter"></span>
   </a>
   <a class="google_plus_link" href="https://plus.google.com/u/0/b/108403125978548990804/108403125978548990804/posts">
-    <span class="dashicons dashicons-googleplus"></span>         
+    <span class="dashicons dashicons-googleplus"></span>
   </a>
 </div><!-- .piklist-social-links -->
 
@@ -477,7 +478,7 @@ get_currentuserinfo();
           shorten: {
                twitter: 'bitly'
           }
-      }, 
+      },
       shorteners : {
           bitly : {}
       }

@@ -2,7 +2,7 @@
 Contributors: piklist, p51labs, sbruner
 Tested up to: 4.5
 Requires at least: 3.7
-Stable tag: 0.9.4.30
+Stable tag: 0.9.4.31
 Donate link: http://piklist.com/get-involved/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -148,6 +148,13 @@ Code-based frameworks also allows you to version control your code, which is ver
 
 
 == Changelog ==
+
+= 0.9.4.31 =
+Release Date: May 19, 2016
+
+* FIX: depreciated Widget class
+* FIX: deprecated get_currentuserinfo
+
 
 = 0.9.4.30 =
 Release Date: April 14, 2016
