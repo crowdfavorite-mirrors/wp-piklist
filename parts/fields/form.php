@@ -1,68 +1,62 @@
 
 <form 
-  method="<?php echo strtolower($method); ?>" 
-  action="<?php echo isset($action) ? home_url() . $action : $_SERVER['REQUEST_URI']; ?>" 
+  method="<?php echo strtolower($data['method']); ?>" 
+  action="<?php echo $data['filter'] ? home_url() . $data['action'] : null; ?>" 
   enctype="multipart/form-data"
-  id="<?php echo $form_id; ?>"
+  id="<?php echo $id; ?>"
+  autocomplete="off"
+  data-piklist-form="true"
+  class="piklist-form <?php echo is_admin() ? 'hidden' : null; ?>"
 >
-
   <?php
+    do_action('piklist_notices', $id);
   
+    foreach ($render as $form):
+
+      piklist::render($form, $data);
+
+    endforeach;
+      
     piklist('field', array(
       'type' => 'hidden'
       ,'scope' => piklist::$prefix
-      ,'field' => 'nonce'
-      ,'value' => $nonce
+      ,'field' => 'form_id'
+      ,'value' => $id
     ));
-  
-    if (!empty($ids))
-    {
-      foreach ($ids as $type => $id)
-      {
-        piklist('field', array(
-          'type' => 'hidden'
-          ,'scope' => $type
-          ,'field' => (in_array($type, array('comment')) ? $type . '_' : '') . (in_array($type, array('taxonomy')) ? 'id' : 'ID')
-          ,'value' => $id
-        ));
-      }
-    }
     
-    foreach (array('post', 'comment', 'taxonomy', 'user') as $type)
-    {
-      $field = (in_array($type, array('comment')) ? $type . '_' : '') . (in_array($type, array('taxonomy')) ? 'id' : 'ID');
-      if (isset($_REQUEST[$field]))
-      {
-        piklist_form::$save_ids[$type] = $_REQUEST[$field];
-      } 
-    }
-    
-    if (isset($_REQUEST['ID']))
-    {
-      piklist_form::$save_ids['post'] = $_REQUEST['ID'];
-      
-      piklist('field', array(
-        'type' => 'hidden'
-        ,'scope' => 'post'
-        ,'field' => 'ID'
-        ,'value' => $_REQUEST['ID']
-      ));
-    }
-    
-    if (isset($filter) && $filter == 'true')
-    {
+    if ($data['filter']):
+
       piklist('field', array(
         'type' => 'hidden'
         ,'scope' => piklist::$prefix
         ,'field' => 'filter'
         ,'value' => 'true'
       ));
-    }
+
+    endif;
     
-  ?>
+    if ($data['redirect']):
+
+      piklist('field', array(
+        'type' => 'hidden'
+        ,'scope' => piklist::$prefix
+        ,'field' => 'redirect'
+        ,'value' => $data['redirect']
+      ));
+
+    endif;
+    
+    if (piklist_admin::hide_ui()):
+
+      piklist('field', array(
+        'type' => 'hidden'
+        ,'scope' => piklist::$prefix
+        ,'field' => 'admin_hide_ui'
+        ,'value' => 'true'
+      ));
+
+    endif;
   
-  <?php piklist::render($form); ?>
-  
-  <?php piklist_form::save_fields(); ?>  
-  
+    piklist_form::save_fields(); 
+  ?>  
 </form>

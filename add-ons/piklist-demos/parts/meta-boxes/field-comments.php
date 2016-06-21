@@ -6,19 +6,24 @@ Order: 30
 Priority: default
 Context: side
 Collapse: true
+Flow: Demo Workflow
 */
 ?>
 
-<h3 class="demo-highlight">
-  <?php _e('Inline comments fields are a snap to add.','piklist-demo');?>
-</h3>
+<p class="piklist-demo-highlight">
+  <?php _e('Inline comments fields are a snap to add.', 'piklist-demo');?>
+</p>
 
 <?php
 
   piklist('field', array(
     'type' => 'comments'
-    ,'label' => 'Notes'
-    ,'description' => 'Add some notes'
+    ,'label' => __('Notes', 'piklist-demo')
+    ,'description' => __('Add some notes', 'piklist-demo')
+    ,'attributes' => array(
+      'class' => 'large-text code'
+      ,'rows' => 5
+    )
   ));
 
 ?>
@@ -26,8 +31,8 @@ Collapse: true
 <?php
 
   global $post, $current_user, $wp_post_statuses;
-
-	wp_get_current_user();
+  
+  get_currentuserinfo();
 
   $comments = get_comments(array(
     'post_id' => $post_id
@@ -45,11 +50,11 @@ Collapse: true
     <div class="piklist-label-container"></div>
 
       <div class="piklist-field">
-
+        
         <?php foreach ($comments as $comment): ?>
 
           <div style="padding: 5px 10px 5px 10px;">
-
+            
             <p>
 
               <small>
@@ -81,5 +86,3 @@ Collapse: true
     'location' => __FILE__
     ,'type' => 'Meta Box'
   ));
-
-?>

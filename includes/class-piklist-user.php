@@ -1,32 +1,55 @@
 <?php
 
-if (!defined('ABSPATH'))
-{
-  exit;
-}
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
-class PikList_User
+/**
+ * Piklist_User
+ * Controls user modifications and features.
+ *
+ * @package     Piklist
+ * @subpackage  User
+ * @copyright   Copyright (c) 2012-2015, Piklist, LLC.
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since       1.0
+ */
+class Piklist_User
 {
+  /**
+   * @var array Registered meta boxes.
+   * @access private
+   */
   private static $meta_boxes = array();
-  
-  private static $meta_box_nonce = false;
-  
+    
+  /**
+   * _construct
+   * Class constructor.
+   *
+   * @access public
+   * @static
+   * @since 1.0
+   */
   public static function _construct()
-  {    
+  {
     add_action('init', array('piklist_user', 'init'));
     add_action('show_user_profile', array('piklist_user', 'meta_box'));
     add_action('edit_user_profile', array('piklist_user', 'meta_box'));
-    add_action('personal_options_update', array('piklist_user', 'process_form'));
-    add_action('edit_user_profile_update', array('piklist_user', 'process_form'));
   }
   
+  /**
+   * init
+   * Initializes system.
+   *
+   * @access public
+   * @static
+   * @since 1.0
+   */
   public static function init()
-  {   
+  {
     self::register_meta_boxes();
 
     $use_multiple_user_roles = piklist::get_settings('piklist_core', 'multiple_user_roles');
 
-    if ($use_multiple_user_roles && (!is_multisite() || ($pagenow == 'user-edit.php' && is_multisite())))
+    if ($use_multiple_user_roles && (!is_multisite() || (isset($pagenow) && $pagenow == 'user-edit.php' && is_multisite())))
     {
       add_action('profile_update', array('piklist_user', 'multiple_roles'));
       add_action('user_register', array('piklist_user', 'multiple_roles'), 9);
@@ -36,69 +59,82 @@ class PikList_User
     }
   }
 
+  /**
+   * register_meta_boxes
+   * Register user meta sections.
+   *
+   * @access public
+   * @static
+   * @since 1.0
+   */
   public static function register_meta_boxes()
   {
-    piklist::process_views('users', array('piklist_user', 'register_meta_boxes_callback'));
-  }
-
-  public static function register_meta_boxes_callback($arguments)
-  {
-    extract($arguments);
-    
-    $current_user = wp_get_current_user();
-    
-    $data = get_file_data($path . '/parts/' . $folder . '/' . $part, apply_filters('piklist_get_file_data', array(
-              'name' => 'Title'
+    $data = array(
+              'title' => 'Title'
               ,'description' => 'Description'
               ,'capability' => 'Capability'
               ,'order' => 'Order'
               ,'role' => 'Role'
               ,'new' => 'New'
-            ), 'users'));
+            );
+
+    piklist::process_parts('users', $data, array('piklist_user', 'register_meta_boxes_callback'));
+  }
+
+  /**
+   * register_meta_boxes_callback
+   * Handle the registration of a user meta section.
+   *
+   * @param array $arguments The part object.
+   *
+   * @access public
+   * @static
+   * @since 1.0
+   */
+  public static function register_meta_boxes_callback($arguments)
+  {
+    global $pagenow;
     
-    $data = apply_filters('piklist_add_part', $data, 'users');
-            
-    $data = array_filter($data);
-   
-    $meta_box = array(
-      'id' => piklist::slug($data['name'])
-      ,'config' => $data
-      ,'part' => $path . '/parts/' . $folder . '/' . $part
-    );
-    
-    if ((!isset($data['capability']) || ($data['capability'] && current_user_can(strtolower($data['capability']))))
-      && (!isset($data['role']) || piklist_user::current_user_role($data['role']))
-      && (!isset($data['new']) || ($data['new'] && (isset($pagenow) && $pagenow != 'user-new.php')))
-    )
+    extract($arguments);
+
+    if (!$data['new'] || ($data['new'] && (isset($pagenow) && $pagenow != 'user-new.php')))
     {
+      foreach (self::$meta_boxes as $key => $meta_box)
+      {
+        if ($id == $meta_box['id'])
+        {
+          unset(self::$meta_boxes[$key]);
+        }
+      }
+      
       if (isset($order))
       {
-        self::$meta_boxes[$order] = $meta_box;
+        self::$meta_boxes[$order] = $arguments;
       }
       else
       {
-        array_push(self::$meta_boxes, $meta_box);
+        array_push(self::$meta_boxes, $arguments);
       }
-    }    
+    }  
   }
 
+  /**
+   * meta_box
+   * Render the meta box.
+   *
+   * @param int $user_id The user id.
+   *
+   * @access public
+   * @static
+   * @since 1.0
+   */
   public static function meta_box($user_id)
   {
     if (!empty(self::$meta_boxes))
     {
-      if (!self::$meta_box_nonce)
-      {
-        piklist_form::render_field(array(
-          'type' => 'hidden'
-          ,'field' => 'nonce'
-          ,'value' => wp_create_nonce(plugin_basename(piklist::$paths['piklist'] . '/piklist.php'))
-          ,'scope' => piklist::$prefix
-        ));
-      
-        self::$meta_box_nonce = true;
-      }
-      
       $user = get_userdata($user_id);
+
+      uasort(self::$meta_boxes, array('piklist', 'sort_by_data_order'));
 
       foreach (self::$meta_boxes as $meta_box)
       {
@@ -109,11 +145,13 @@ class PikList_User
 
         do_action('piklist_pre_render_user_meta_box', $user, $meta_box);
   
-        piklist::render($meta_box['part'], array(
-          'user_id' => $user_id
-          ,'prefix' => 'piklist'
-          ,'plugin' => 'piklist'
-        ), false);
+        foreach ($meta_box['render'] as $render)
+        {
+          piklist::render($render, array(
+            'user_id' => $user_id
+            ,'data' => $meta_box['data']
+          ), false);
+        }
 
         do_action('piklist_post_render_user_meta_box', $user, $meta_box);
         
@@ -125,24 +163,41 @@ class PikList_User
     }
   }
   
-  public static function process_form($user_id)
-  {
-    piklist_form::process_form(array(
-      'user' => $user_id
-    ));
-  }
-  
+  /**
+   * additional_capabilities_display
+   * Remove the "additional capabilites" section on a users profile page.
+   *
+   * @param int $user_id The user id.
+   *
+   * @return false
+   *
+   * @access public
+   * @static
+   * @since 1.0
+   */
   public static function additional_capabilities_display($user_id)
   {
     return false;
   }
   
+  /**
+   * multiple_roles
+   * Allow saving of multiple user roles.
+   * Keeps a log of when roles were updated.
+   * 
+   * @param int $user_id The user id.
+   * @param mixed $roles Collection of roles.
+   *
+   * @access public
+   * @static
+   * @since 1.0
+   */
   public static function multiple_roles($user_id, $roles = false)
   {
     global $wpdb, $wp_roles, $current_user, $pagenow;
     
-    $roles = $roles ? $roles : (isset($_POST['roles']) && isset($_POST['roles'][0]) ? $_POST['roles'][0] : false);
-
+    $roles = $roles ? $roles : (isset($_POST['roles']) ? $_POST['roles'] : false);
+    
     if ($roles && current_user_can('edit_user', $current_user->ID))
     {      
       $editable_roles = get_editable_roles();
@@ -185,14 +240,22 @@ class PikList_User
     }
   }
   
-  public static function multiple_roles_field($user)
+  /**
+   * multiple_roles_field
+   * Render a checkbox field on the user screen to allow for selecting multiple user roles.
+   *
+   * @access public
+   * @static
+   * @since 1.0
+   */
+  public static function multiple_roles_field()
   {
     global $pagenow, $user_id;
     
     if (in_array($pagenow, array('user-edit.php', 'user-new.php')))
     {
       $editable_roles = get_editable_roles();
-
+      
       if ($user_id)
       {
         $user = get_user_to_edit($user_id);
@@ -216,6 +279,16 @@ class PikList_User
     }
   }
 
+  /**
+   * available_capabilities
+   * Returns an array of all available capabilites.
+   *
+   * @return array Collection of capabilities.
+   *
+   * @access public
+   * @static
+   * @since 1.0
+   */
   public static function available_capabilities()
   {
     global $wp_roles;
@@ -241,6 +314,16 @@ class PikList_User
     return $capabilities;
   }
 
+  /**
+   * available_roles
+   * Returns an array of all available role names.
+   *
+   * @return array Collection of roles.
+   *
+   * @access public
+   * @static
+   * @since 1.0
+   */
   public static function available_roles()
   {
     global $wp_roles;
@@ -250,6 +333,18 @@ class PikList_User
     return $roles;
   }
 
+  /**
+   * current_user_role
+   * Checks if the current user's role in an array of $roles.
+   *
+   * @return array Collection of roles.
+   *
+   * @return bool Whether the role was found.
+   *
+   * @access public
+   * @static
+   * @since 1.0
+   */
   public static function current_user_role($roles)
   {
     $current_user = wp_get_current_user();
@@ -261,7 +356,7 @@ class PikList_User
 
     foreach ($current_user->roles as $user_role)
     {
-      if(in_array(strtolower($user_role), $roles_array))
+      if (in_array(strtolower($user_role), $roles_array))
       {
         return true;
       }
@@ -270,70 +365,37 @@ class PikList_User
     return false;
   }
   
-  public static function include_user_profile_fields($arguments)
+  /**
+   * current_user_can
+   * Checks if the current user's capability is listed in an array of $capabilities.
+   *
+   * @param array $capabilities Collection of capabilities.
+   * @param bool $needs_all The curent user's capability must match ALL capabilities in the array.
+   *
+   * @return bool Status of check.
+   *
+   * @access public
+   * @static
+   * @since 1.0
+   */
+  public static function current_user_can($capabilities, $needs_all = false) 
   {
-    global $wp_filter;
-    
-    $tags = array(
-      'show_user_profile'
-      ,'edit_user_profile'
-      ,'personal_options_update'
-      ,'edit_user_profile_update'
-    );
-    
-    if (isset($arguments['actions']))
+    $capabilities = is_array($capabilities) ? $capabilities : explode(',', $capabilities);
+  
+    foreach ($capabilities as $capability) 
     {
-      foreach ($tags as $tag)
+      $user_can = current_user_can(trim(strtolower($capability)));
+    
+      if ($needs_all && !$user_can)
+      { 
+        return false;
+      }
+      elseif (!$needs_all && $user_can)
       {
-        foreach ($wp_filter[$tag] as $priority => $callback)
-        {
-          foreach ($callback as $id => $config)
-          {
-            foreach ($arguments['actions'] as $action)
-            {
-              if (strstr($id, $action))
-              {
-                $idx = _wp_filter_build_unique_id($action, $id, $priority);
-                if ($idx == $id)
-                {
-                  array_push($arguments['actions'], $id);
-                }
-              }
-            }
-
-            if (!in_array($id, $arguments['actions']) && ($wp_filter[$tag][$priority][$id]['function'][0] != 'piklist_form' && $wp_filter[$tag][$priority][$id]['function'][0] != 'save_fields'))
-            {
-              unset($wp_filter[$tag][$priority][$id]);
-            }
-          }
-        
-          if (empty($wp_filter[$tag][$priority]))
-          {
-            unset($wp_filter[$tag][$priority]);
-          }
-        }
-      
-        if (empty($wp_filter[$tag]))
-        {
-          unset($wp_filter[$tag]);
-        }
+        return true;
       }
     }
-    
-    if (isset($arguments['meta_boxes']))
-    {
-      $count = count(self::$meta_boxes);
-      for ($i = 0; $i < $count; $i++)
-      {
-        if (!in_array(self::$meta_boxes[$i]['config']['name'], $arguments['meta_boxes']))
-        {
-          unset(self::$meta_boxes[$i]);
-        }
-      }
-    }
-
-    piklist('shared/admin-user-profile-fields', array(
-      'meta_boxes' => isset($arguments['meta_boxes']) ? $arguments['meta_boxes'] : array()
-    ));
+  
+    return $needs_all;
   }
 }

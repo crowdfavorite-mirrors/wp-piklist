@@ -1,27 +1,32 @@
 <?php
 /*
+Title: Editor Examples
 Post Type: piklist_demo
 Order: 100
 Lock: true
-Meta box: false
+Flow: Demo Workflow
+Tab: Common
+Sub Tab: Editor
 */
 
   piklist('field', array(
     'type' => 'editor'
     ,'field' => 'post_content'
     ,'scope' => 'post'
-    ,'label' => 'Post Content'
-    ,'description' => 'This is the standard WordPress Editor, placed in a Metabox, which is placed in a Piklist WorkFlow tab. By default, Piklist formats the editor like any other field with a label to the left.'
+    ,'required' => true
+    ,'label' => __('Post Content', 'piklist-demo')
+    ,'description' => __('This is a replacement for the post_content editor', 'piklist-demo')
     ,'value' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-    ,'options' => array (
+    ,'options' => array(
       'wpautop' => true
       ,'media_buttons' => true
-      ,'tabindex' => ''
-      ,'editor_css' => ''
-      ,'editor_class' => ''
+      ,'shortcode_buttons' => true
       ,'teeny' => false
       ,'dfw' => false
-      ,'tinymce' => true
+      ,'tinymce' => array(
+        'resize' => false
+        ,'wp_autoresize_on' => true
+      )
       ,'quicktags' => true
       ,'drag_drop_upload' => true
     )
@@ -33,15 +38,19 @@ Meta box: false
   piklist('field', array(
     'type' => 'editor'
     ,'field' => 'post_content_add_more'
-    ,'label' => 'Post Content Add More'
+    ,'label' => __('Post Content Add More', 'piklist-demo')
     ,'add_more' => true
-    ,'description' => 'This is the teeny editor used in an add-more repeater field.'
+    ,'description' => __('This is the teeny editor used in an add-more repeater field.', 'piklist-demo')
     ,'value' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-    ,'options' => array (
-      'media_buttons' => true
+    ,'options' => array(
+      'media_buttons' => false
       ,'teeny' => true
       ,'textarea_rows' => 5
-      ,'drag_drop_upload' => true
+      ,'drag_drop_upload' => false
+      ,'tinymce' => array(
+        'resize' => false
+        ,'wp_autoresize_on' => true
+      )
     )
   ));
 
@@ -49,5 +58,3 @@ Meta box: false
     'location' => __FILE__
     ,'type' => 'Meta Box'
   ));
-  
-?>

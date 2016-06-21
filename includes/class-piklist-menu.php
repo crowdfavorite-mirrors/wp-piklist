@@ -1,37 +1,46 @@
 <?php
 
-if (!defined('ABSPATH'))
-{
-  exit;
-}
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
-class PikList_Menu
+/**
+ * Piklist_Menu
+ * Controls menu modifications and features.
+ *
+ * @package     Piklist
+ * @subpackage  Menu
+ * @copyright   Copyright (c) 2012-2015, Piklist, LLC.
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since       1.0
+ */
+class Piklist_Menu
 {
+  /**
+   * _construct
+   * Class constructor.
+   *
+   * @access public
+   * @static
+   * @since 1.0
+   */
   public static function _construct()
-  {    
-    add_action('init', array('piklist_menu', 'init'));
-
+  {
     add_filter('wp_nav_menu', array('piklist_menu', 'wp_nav_menu_updates'));
   }
- 
-  public static function init()
-  {    
-    self::register_nav_menus();
-  }
   
-  public static function register_nav_menus()
-  {
-    $menus = apply_filters('piklist_menus', array());
-    
-    foreach ($menus as $menu)
-    {
-      register_nav_menus($menu);
-    }
-  }
-  
+  /**
+   * wp_nav_menu_updates
+   * Add first and last classes to the menus
+   *
+   * @param string $output The html output of the menu.
+   *
+   * @return string The html output of the menu.
+   *
+   * @access public
+   * @static
+   * @since 1.0
+   */
   public static function wp_nav_menu_updates($output) 
   {
-    // NOTE: Replace with custom walker and use descriptions instead of titles
     $permalink_structure = get_option('permalink_structure');
     
     if (!empty($permalink_structure))
@@ -45,6 +54,7 @@ class PikList_Menu
         $id = get_post_meta($menu_id, '_menu_item_object_id', true);
   
         $class = '';
+        
         if ($i == 0)
         {
           $class = 'first-menu-item';
@@ -55,30 +65,6 @@ class PikList_Menu
         }
   
         $output = preg_replace('/menu-item-' . $menu_id . '">/', 'menu-item-' . $menu_id . ' menu-item-' . basename(get_permalink($id)) . ' ' . $class . '">', $output, 1);
-      }
-    }
-
-    if (strstr($output, 'main-menu'))
-    {
-      preg_match_all(
-        '#<a\s
-          (?:(?= [^>]* href="(?P<href> [^"]*) ")|)
-          (?:(?= [^>]* title="(?P<title> [^"]*) ")|)
-          [^>]*>
-          (?P<text>[^<]*)
-          </a>
-        #xi'
-        ,$output
-        ,$links
-        ,PREG_SET_ORDER
-      );
-
-      foreach ($links as $link)
-      {
-        if (!empty($link['title']))
-        {
-          $output = str_replace('>' . $link['text'] . '<', '>' . $link['text'] . '<span>' . $link['title'] . '</span><', $output);
-        }
       }
     }
 
